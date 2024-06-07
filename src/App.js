@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ThemeContext } from "./Contexts/ThemeContext";
+import { RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import router from "./Routes/Routes";
+import useProduct from "./Hooks/useProduct";
 
 function App() {
+  const [products] = useProduct();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider
+      value={{
+        products,
+      }}
+    >
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster />
+    </ThemeContext.Provider>
   );
 }
 
